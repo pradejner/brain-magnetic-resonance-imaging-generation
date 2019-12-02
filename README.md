@@ -9,9 +9,6 @@ For example, GANs can use a training set of photographs of human faces to create
 ### How do GANs work?
 GANs consist of two neural networks that contest with each other. The generative network generates plausible candidates while the discriminative network evaluates candidates by distinguishing the generator's fake data from real data.
 
-## GAN Anatomy
-
-### Overview
 At the beginning of training, the generator will produce data that is obviously fake and the discriminator quickly learns to tell that it is fake data:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/bad_gan.svg "Bad GAN example")
 
@@ -21,11 +18,34 @@ As training continues, the generator will continue to get closer to producing ou
 Eventually, if the generator training goes well, the generator will produce data which is difficult to distinguish as fake or real. The discriminator gets worse at telling the differences and accuracy decreases:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/good_gan.svg "Good GAN example")
 
+## GAN Anatomy
+
+### Overview
+![alt text](https://github.com/pejner/keras-gan/blob/master/images/gan_diagram.svg "GAN overview")
+
+
+
 ### Discriminator
 
 
 
 ### Generator
+
+## Applications
+
+### Science
+
+### Video games
+
+## Common Problems
+
+### Vanishing Gradients
+
+### Failure to Converge
+
+### Mode Collapse
+
+
 
 ## Contributors
 Prad Ejner
