@@ -12,10 +12,13 @@ GANs consist of two neural networks that contest with each other. The generative
 ## GAN Anatomy
 
 ### Overview
+At the beginning of training, the generator will produce data that is obviously fake and the discriminator quickly learns to tell that it is fake data:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/bad_gan.svg "Bad GAN example")
 
+As training continues, the generator will continue to get closer to producing output that can fool the discriminator:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/ok_gan.svg "Decent GAN example")
 
+Eventually, if the generator training goes well, the generator will produce data which is difficult to distinguish as fake or real. The discriminator gets worse at telling the differences and accuracy decreases:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/good_gan.svg "Good GAN example")
 
 ### Discriminator
