@@ -1,5 +1,7 @@
 # Generative Adversarial Networks
 
+>"the coolest idea in machine learning in the last twenty years." - Yann LeCun
+
 ## Introduction
 **Generative adversarial networks**(GANs) are a recent innovation(2014) in machine learning invented by Ian Goodfellow and his colleagues. Given a training set, a neural network will learn to generate new data with the same statistics as the training set.
 For example, GANs can use a training set of photographs of human faces to create images of human faces. These generated images don't belong to any real person.
@@ -18,16 +20,12 @@ As training continues, the generator will continue to get closer to producing ou
 Eventually, if the generator training goes well, the generator will produce data which is difficult to distinguish as fake or real. The discriminator gets worse at telling the differences and accuracy decreases:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/good_gan.svg "Good GAN example")
 
-## GAN Anatomy
-
-### Overview
+Picture of the whole system:
 ![alt text](https://github.com/pejner/keras-gan/blob/master/images/gan_diagram.svg "GAN overview")
 
-
+## GAN Anatomy
 
 ### Discriminator
-
-
 
 ### Generator
 
@@ -35,7 +33,11 @@ Eventually, if the generator training goes well, the generator will produce data
 
 ### Science
 
+### Fashion, art, advertising
+
 ### Video games
+
+### Concerns of possible malicious applications
 
 ## Common Problems
 
