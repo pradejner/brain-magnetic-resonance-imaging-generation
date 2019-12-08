@@ -210,11 +210,11 @@ class DCGAN:
 
                 self.save_imgs(epoch)
 
-                save_path = self.output_directory + "/models"
+                save_path = os.path.join(self.output_directory, "models")
                 if not os.path.exists(save_path):
                     os.makedirs(save_path)
-                self.discriminator.save(save_path + "/discrim.h5")
-                self.generator.save(save_path + "/generat.h5")
+                self.discriminator.save(os.path.join(save_path, "discrim.h5"))
+                self.generator.save(os.path.join(save_path, "generat.h5"))
 
     def gene_imgs(self, count):
         " Generate images from the currently loaded model"
@@ -243,10 +243,10 @@ class DCGAN:
                   .swapaxes(1, 2)
                   .reshape(height * nrows, width * c, intensity))
 
-        path = f"{self.output_directory}/gallery_generated_{self.img_size[0]}x{self.img_size[1]}"
+        path = os.path.join(f"{self.output_directory}", f"gallery_generated_{self.img_size[0]}x{self.img_size[1]}")
         if not os.path.exists(path):
             os.makedirs(path)
-        imsave(path + f"/{epoch}.png", gallery)
+        imsave(os.path.join(path, f"{epoch}.png"), gallery)
 
     def generate_imgs(self, count, threshold, modifier):
         """
@@ -269,10 +269,10 @@ class DCGAN:
 
         print(imgs.shape)
         for i, img_array in enumerate(imgs):
-            path = f"{self.output_directory}/generated_{threshold[0]}_{threshold[1]}"
+            path = os.path.join(f"{self.output_directory}", f"generated_{threshold[0]}_{threshold[1]}")
             if not os.path.exists(path):
                 os.makedirs(path)
-            imsave(path + f"/{modifier}_{i}.png", img_array)
+            imsave(os.path.join(path + f"{modifier}_{i}.png"), img_array)
 
 
 if __name__ == '__main__':
@@ -280,13 +280,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--load_generator',
         help='Path to existing generator weights file',
-        default="data/models/generat.h5")
+        default=os.path.join("data", "models", "generat.h5"))
     parser.add_argument('--load_discriminator',
         help='Path to existing discriminator weights file',
-        default="data/models/discrim.h5")
+        default = os.path.join("data", "models", "discrim.h5"))
     parser.add_argument('--data',
         help='Path to directory of images of correct dimensions, using *.[filetype] (e.g. *.png) to reference images',
-        default="datasets/ArtUK Dataset/32_32/*.png")
+        default = os.path.join("datasets", "ArtUK Dataset", "32_32", "*.png"))
     parser.add_argument('--sample',
         help='If given, will generate that many samples from existing model instead of training',
         default=-1)
@@ -307,8 +307,8 @@ if __name__ == '__main__':
         default=100)
     parser.add_argument('--output_directory',
         help="Directory to save weights and images to.",
-        default = f"output/{VERSION}   {START_TIME}/")
-#output/"+ VERSION + " " + START_TIME + "/"
+        default = os.path.join("output", f"{VERSION}   {START_TIME}"))
+
     args = parser.parse_args()
 
     dcgan = DCGAN(args.load_discriminator, args.load_generator, args.output_directory, literal_eval(args.image_size))
