@@ -2,7 +2,7 @@ from keras.models import Sequential, Model, load_model
 from keras.layers import UpSampling2D, Conv2D, Activation, BatchNormalization, Reshape, Dense, Input, LeakyReLU, Dropout, Flatten, ZeroPadding2D
 from keras.optimizers import Adam
 
-import glob, tqdm
+import glob
 from PIL import Image
 import numpy as np
 import os, time
@@ -180,9 +180,7 @@ class DCGAN:
 
         half_batch = batch_size // 2
 
-        prog_bar = tqdm.tqdm(range(epochs))
-        prog_bar.ncols = 15
-        for epoch in prog_bar:
+        for epoch in range(epochs):
 
 
             # Train Generator
@@ -205,8 +203,8 @@ class DCGAN:
             d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
 
             # Print progress
-            prog_bar.set_description(("D loss: " + format(d_loss[0], "^-06.3f") + " | D Accuracy: " + format(d_loss[1], "^-06.3f") +" | G loss: " + format(g_loss, "^-06.3f")))
-            #prog_bar.set_description(f"{epoch} [D loss: {d_loss[0]} | D Accuracy: {100 * d_loss[1]}] [G loss: {g_loss}]")
+            print(f"{epoch} [D loss: {d_loss[0]} | D Accuracy: {100 * d_loss[1]}] [G loss: {g_loss}]")
+
             # If at save interval => save generated image samples, save model files
             if epoch % (save_interval) == 0:
 
