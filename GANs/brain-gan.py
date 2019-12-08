@@ -78,24 +78,8 @@ class DCGAN:
         model.summary()
         
         return model
-        
-
-    def build_generator(self):
-        noise_shape = (100,)
-        
-        model = build_generator_model(noise_shape)
-
-        noise = Input(shape=noise_shape)
-        img = model(noise)
-
-        
-
-        return Model(noise, img)
-
-    def build_discriminator(self):
-
-        img_shape = (self.img_size[0], self.img_size[1], self.channels)
-
+    
+    def build_discriminator_model(self, img_shape):
         model = Sequential()
 
         model.add(Conv2D(32, kernel_size=self.kernel_size, strides=2, input_shape=img_shape, padding="same"))  # 192x256 -> 96x128
@@ -125,6 +109,22 @@ class DCGAN:
         model.add(Dense(1, activation='sigmoid'))
 
         model.summary()
+        
+
+    def build_generator(self):
+        noise_shape = (100,)
+        
+        model = self.build_generator_model(noise_shape)
+
+        noise = Input(shape=noise_shape)
+        img = model(noise)
+
+        return Model(noise, img)
+
+    def build_discriminator(self):
+        img_shape = (self.img_size[0], self.img_size[1], self.channels)
+        
+        model = self.build_discriminator_model(img_shape)
 
         img = Input(shape=img_shape)
         validity = model(img)
