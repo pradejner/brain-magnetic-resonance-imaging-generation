@@ -9,10 +9,8 @@ import os
 import argparse
 from ast import literal_eval
 
-# scipy.misc.imsave is deprecated. Instead using imageio.imwrite
 import imageio
 imsave = imageio.imwrite 
-
 
 class DCGAN:
     def __init__(self, discriminator_path, generator_path, output_directory, img_size):
@@ -24,10 +22,10 @@ class DCGAN:
         self.discriminator_path = discriminator_path
         self.generator_path = generator_path
         self.output_directory = output_directory
-
-    def build_generator(self):
-        noise_shape = (100,)
-
+        
+    def build_generator_model(self, noise_shape):
+        model = Sequential()
+        
         # This block of code can be a little daunting, but essentially it automatically calculates the required starting
         # array size that will be correctly upscaled to our desired image size.
         #
@@ -35,7 +33,6 @@ class DCGAN:
         # x size by taking (x / 2^upsample_count) So for our target image size, 256x192, we do the following:
         # x = (192 / 2^5), y = (256 / 2^5) [x and y are reversed within the model]
         # We also need a 3rd dimension which is chosen relatively arbitrarily, in this case it's 64.
-        model = Sequential()
         model.add(
             Dense(self.starting_filters 
                     * (self.img_size[0] // (2 ** self.upsample_layers))  
@@ -77,11 +74,21 @@ class DCGAN:
 
         model.add(Conv2D(self.channels, kernel_size=self.kernel_size, padding="same"))
         model.add(Activation("tanh"))
-
+        
         model.summary()
+        
+        return model
+        
+
+    def build_generator(self):
+        noise_shape = (100,)
+        
+        model = build_generator_model(noise_shape)
 
         noise = Input(shape=noise_shape)
         img = model(noise)
+
+        
 
         return Model(noise, img)
 
@@ -128,7 +135,6 @@ class DCGAN:
         optimizer = Adam(0.0002, 0.5)
 
         # See if the specified model paths exist, if they don't then we start training new models
-
         if os.path.exists(self.discriminator_path) and os.path.exists(self.generator_path):
             self.discriminator = load_model(self.discriminator_path)
             self.generator = load_model(self.generator_path)
