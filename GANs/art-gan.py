@@ -233,7 +233,7 @@ class DCGAN:
             path = os.path.join(self.output_directory, ("generated_" + str(self.img_size[0]) + "_" + str(self.img_size[1])))
             if not os.path.exists(path):
                 os.makedirs(path)
-            imsave(os.path.join(path, (str(epoch) + "_" + str(i) + ".png")), np.uint8(img_array))
+            imsave(os.path.join(path, (str(epoch) + "_" + str(i) + ".png")), img_array)
 
         nindex, height, width, intensity = imgs.shape
         nrows = nindex // c
@@ -246,7 +246,7 @@ class DCGAN:
         path = os.path.join(f"{self.output_directory}", f"gallery_generated_{self.img_size[0]}x{self.img_size[1]}")
         if not os.path.exists(path):
             os.makedirs(path)
-        imsave(os.path.join(path, f"{epoch}.png"), np.uint8(gallery))
+        imsave(os.path.join(path, f"{epoch}.png"), gallery)
 
     def generate_imgs(self, count, threshold, modifier):
         """
@@ -272,7 +272,7 @@ class DCGAN:
             path = os.path.join(f"{self.output_directory}", f"generated_{threshold[0]}_{threshold[1]}")
             if not os.path.exists(path):
                 os.makedirs(path)
-            imsave(os.path.join(path, f"{modifier}_{i}.png"), np.uint8(img_array))
+            imsave(os.path.join(path + f"{modifier}_{i}.png"), img_array)
 
 
 if __name__ == '__main__':
