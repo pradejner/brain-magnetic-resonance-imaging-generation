@@ -26,6 +26,17 @@ Picture of the whole system:
 ## GAN Anatomy
 
 ### Discriminator
+The discriminator in a GAN is a classifier. The discriminator tries to distinguish real data from the data created by the generator.
+
+#### Discriminator Training
+During discriminator training, the generator does not train. The weights for the generator remain constant while it produces images for the discriminator to train on.
+
+The data used for training the discriminator comes from two sources:
+
+- **Real Data** are considered positive instances during training.
+- **Fake Data** are considered negative instances during training.
+
+If the discriminator misclassifies real instance as fake or fake data as real, the discriminator loss penelizes the discriminator. Discriminator will use the discriminator loss to update its weights through backpropagation.
 
 ### Generator
 
