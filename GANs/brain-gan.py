@@ -110,6 +110,8 @@ class DCGAN:
 
         model.summary()
         
+        return model
+        
 
     def build_generator(self):
         noise_shape = (100,)
