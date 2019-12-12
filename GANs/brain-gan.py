@@ -229,8 +229,8 @@ class DCGAN:
                 save_path = self.output_directory + "/models"
                 if not os.path.exists(save_path):
                     os.makedirs(save_path)
-                self.discriminator.save(save_path + "/discrim.h5")
-                self.generator.save(save_path + "/generat.h5")
+                self.discriminator.save(save_path + f"/{epoch} discrim.h5")
+                self.generator.save(save_path + f"/{epoch} generat.h5")
 
     def gene_imgs(self, count):
         " Generate images from the currently loaded model"
