@@ -170,6 +170,16 @@ class DCGAN:
             X_train.append(img)
         return np.asarray(X_train)
 
+    def pix_array_convert(self, img):
+        img_array = np.asarray(img)
+        if np.max(img_array) > 1 or np.min(img_array) < 0:
+            print("Picture array outside expected value")
+            exit()
+        else:
+            img_array = np.uint8(255*img_array)
+
+        return(img_array)
+
     def train(self, epochs, image_path, batch_size=32, save_interval=50):
         self.build_gan()
         X_train = self.load_imgs(image_path)
@@ -239,7 +249,7 @@ class DCGAN:
             path = f"{self.output_directory}/generated_{self.img_size[0]}x{self.img_size[1]}"
             if not os.path.exists(path):
                 os.makedirs(path)
-            imsave(path + f"/{epoch}_{i}.png", img_array)
+            imsave(path + f"/{epoch}_{i}.png", self.pix_array_convert(img_array))
 
         nindex, height, width, intensity = imgs.shape
         nrows = nindex // c
@@ -252,7 +262,7 @@ class DCGAN:
         path = f"{self.output_directory}/gallery_generated_{self.img_size[0]}x{self.img_size[1]}"
         if not os.path.exists(path):
             os.makedirs(path)
-        imsave(path + f"/{epoch}.png", gallery)
+        imsave(path + f"/{epoch}.png", self.pix_array_convert(gallery))
 
     def generate_imgs(self, count, threshold, modifier):
         """
@@ -278,7 +288,7 @@ class DCGAN:
             path = f"{self.output_directory}/generated_{threshold[0]}_{threshold[1]}"
             if not os.path.exists(path):
                 os.makedirs(path)
-            imsave(path + f"/{modifier}_{i}.png", img_array)
+            imsave(path + f"/{modifier}_{i}.png", self.pix_array_convert(img_array))
 
 
 if __name__ == '__main__':
