@@ -1,0 +1,12 @@
+
+
+        dropout = (0.27, 0.30, 0.33, 0.36)              #Prad
+        bn_momentum = (0.70, 0.75, 0.82, 0.84. 0.86)    #Jordan
+        adam_lr = (0.00010, 0.00015, 0.00025, 0.00030)  #Dan
+        adam_beta = (0.4, 0.45, 0.55, 0.60)             #Dan
+
+        # original values are:
+        # dropout       = 0.25
+        # bn_momentum   = 0.80
+        # adam_lr       = 0.0002
+        # adam_beta     = 0.5
