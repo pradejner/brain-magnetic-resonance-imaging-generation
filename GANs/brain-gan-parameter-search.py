@@ -330,7 +330,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     dcgan = DCGAN(args.load_discriminator, args.load_generator, args.output_directory, literal_eval(args.image_size),
-    args.dropout, args.bn_momentum, args.adam_lr, args.adam_beta)
+    float(args.dropout), float(args.bn_momentum), float(args.adam_lr), float(args.adam_beta))
 
     if args.sample == -1:
         dcgan.train(epochs=int(args.epochs), image_path=args.data,
