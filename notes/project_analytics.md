@@ -6,6 +6,13 @@
 
 ### Tweaking Parameters
 
+**Original Values:**
+
+| Dropout | bn_momentum   | adam_lr  | adam_beta |
+| ------- |:-------------:| :-------:| -----------:
+| 0.25    | 0.80          | 0.0002   | 0.50
+
+
 ## Problems
 
 ## Measuring Results
