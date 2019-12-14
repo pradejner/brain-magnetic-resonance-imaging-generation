@@ -36,9 +36,19 @@ The data used for training the discriminator comes from two sources:
 - **Real Data** are considered positive instances during training.
 - **Fake Data** are considered negative instances during training.
 
-If the discriminator misclassifies real instance as fake or fake data as real, the discriminator loss penelizes the discriminator. Discriminator will use the discriminator loss to update its weights through backpropagation.
+If the discriminator misclassifies real instance as fake or fake data as real, the discriminator loss penalizes the discriminator. Discriminator will use the discriminator loss to update its weights through backpropagation.
 
 ### Generator
+The goals of the generator is to fool the discriminator. Using feedback from the discriminator, the generator will create fake data and learn to make the discriminator classify generator output as real data.
+
+#### Random Input
+Typically with with deep learning models, input data is an instance that we want to classify or make a prediction about. However, with GANs we want output that is entirely new data instances. Therefore, the generator will start by taking random noise as its input. The generator will then transform this noise into meaningful output.
+
+#### Discriminator helps train the Generator
+Typically, we alter a neural network's weights to reduce the error or loss of its output. However, with GANs, the generator is not directly connected to the loss we are trying to affect(the discriminator is). The generator loss penalizes the generator whenever it produces data that the discriminator classifies as fake.
+
+Backpropagation adjusts each weight by calculating the weight's impact on the output. Backpropagation start with the output from the discriminator and flows back through the disciminator into the generator to obtain gradients. The gradients are used to change the generator weights.
+
 
 ## Applications
 
@@ -61,6 +71,4 @@ If the discriminator misclassifies real instance as fake or fake data as real, t
 
 
 ## Contributors
-Prad Ejner
-Dan Mohler
-Jordan Winkler
+Prad Ejner, Dan Mohler, Jordan Winkler
