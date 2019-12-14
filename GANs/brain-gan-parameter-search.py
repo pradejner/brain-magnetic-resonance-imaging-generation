@@ -12,6 +12,13 @@ from ast import literal_eval
 import imageio
 imsave = imageio.imwrite
 
+# To stop using up all of the RAM when running the models
+import tensorflow as tf
+import keras
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+keras.backend.tensorflow_backend.set_session(tf.Session(config=config))
+
 class DCGAN:
     def __init__(self, discriminator_path, generator_path, output_directory, img_size, dropout, bn_momentum, adam_lr, adam_beta):
         self.img_size = img_size
