@@ -1,7 +1,15 @@
+"""
+Authors:       Dan Mohler, Prad Ejner, Jordan Winkler
+Last updated:  Sun Dec 15 15:22:17 EST 2019
+Description:   A generative adversarial network for generating images of brains
+"""
+
+# Deep Learning libraries for model
 from keras.models import Sequential, Model, load_model
 from keras.layers import UpSampling2D, Conv2D, Activation, BatchNormalization, Reshape, Dense, Input, LeakyReLU, Dropout, Flatten, ZeroPadding2D
 from keras.optimizers import Adam
 
+# Operating system and computational libraries for OS interfacing
 import glob,tqdm
 from PIL import Image
 import numpy as np
@@ -9,6 +17,7 @@ import os
 import argparse
 from ast import literal_eval
 
+# Update for image save 
 import imageio
 imsave = imageio.imwrite
 
@@ -19,6 +28,12 @@ config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 keras.backend.tensorflow_backend.set_session(tf.Session(config=config))
 
+
+# DCGAN : Deep Convolutional Generative Adversarial Network
+#
+# Main paper describing the process
+# Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks
+# https://arxiv.org/pdf/1511.06434.pdf
 class DCGAN:
     def __init__(self, discriminator_path, generator_path, output_directory, img_size, dropout, bn_momentum, adam_lr, adam_beta):
         self.img_size = img_size
@@ -56,6 +71,8 @@ class DCGAN:
                            self.starting_filters)))
         model.add(BatchNormalization(momentum=self.bn_momentum))
 
+
+        # Repeats the pattern of: stretching out data, mutating/shrinking data, and normalization
         model.add(UpSampling2D())  # 6x8 -> 12x16
         model.add(Conv2D(1024, kernel_size=self.kernel_size, padding="same"))
         model.add(Activation("relu"))
