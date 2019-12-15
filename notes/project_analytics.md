@@ -28,7 +28,7 @@ FID scores was proposed as an improvement over the existing Inception Score(IS) 
 **Modified Values:**
 
 | Dropout | bn_momentum   | adam_lr   | adam_beta  | FID Score |
-| ------- |:-------------:| :--------:| :----------: ----------:
+| ------- |:-------------:| :--------:| :---------:| ----------:
 | 0.25    | 0.70          | 0.0002    | 0.50       | 187.83    |
 | 0.25    | 0.75          | 0.0002    | 0.50       | 173.23    |
 | 0.25    | 0.80          | 0.0001    | 0.50       | 184.46    |
