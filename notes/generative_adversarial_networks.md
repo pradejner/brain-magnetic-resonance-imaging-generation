@@ -48,27 +48,3 @@ Typically with with deep learning models, input data is an instance that we want
 Typically, we alter a neural network's weights to reduce the error or loss of its output. However, with GANs, the generator is not directly connected to the loss we are trying to affect(the discriminator is). The generator loss penalizes the generator whenever it produces data that the discriminator classifies as fake.
 
 Backpropagation adjusts each weight by calculating the weight's impact on the output. Backpropagation start with the output from the discriminator and flows back through the disciminator into the generator to obtain gradients. The gradients are used to change the generator weights.
-
-
-## Applications
-
-### Science
-
-### Fashion, art, advertising
-
-### Video games
-
-### Concerns of possible malicious applications
-
-## Common Problems
-
-### Vanishing Gradients
-
-### Failure to Converge
-
-### Mode Collapse
-
-
-
-## Contributors
-Prad Ejner, Dan Mohler, Jordan Winkler
