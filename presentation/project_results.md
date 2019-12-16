@@ -1,5 +1,16 @@
 # Project Results
 
+## Major issues with GANs
+
+#### Non-convergence
+Non-convergence occurs when the model parameters oscillate, destabilize and never converge.
+
+#### Mode collapse
+Mode collapse occurs when  the discrimintor is too harsh and causes the generator to produce a limited variety of sample.
+
+#### Diminished gradient
+The discriminator gets too successful that the generator gradient vanishes and learns nothing.
+
 
 ## Results
 
